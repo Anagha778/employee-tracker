@@ -131,3 +131,40 @@ function viewAllEmployee()
         });
 };
 
+//Add a new department
+function addDepartment()
+{   
+    inquirer.prompt([
+    {
+        type :"input",
+        message :"Please enter department name: ",
+        name : "dept_name",
+        validate: nameInput => {
+            if (nameInput) {
+              return true;
+            } else {
+              console.log('Please enter department name!');
+              return false;
+            }
+          }
+    }
+    ]).then(function(res) {
+        con.query("INSERT INTO department SET ?",
+        {
+            name : res.dept_name
+        },    
+        function (err, result) {
+            if (err) throw err;
+            console.log("");
+            console.log("----------------------------------------------------");
+            console.log(chalk.yellow("     Number of records inserted: ") + result.affectedRows);
+            console.log("-----------------------------------------------------");
+            console.log("");
+            empprompt();
+          });
+    });
+   
+};
+
+
+
