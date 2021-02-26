@@ -95,3 +95,18 @@ function viewAllDepartments()
             empprompt();
         });
 };
+
+
+//View all roles
+function viewAllRoles()
+{   
+    con.query("select role.id AS role_id,role.title AS job_title,role.salary,department.name as dept_name from role join department on role.department_id = department.id;",
+        function(err, results) {
+            if (err) throw err;
+            console.log("");
+            console.log("--------------------------------------------------");
+            console.table(chalk.yellow("        All Roles"),results); // results contains rows returned by server
+            console.log("");
+            empprompt();
+        });
+};
