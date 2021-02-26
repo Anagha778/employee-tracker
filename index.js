@@ -110,3 +110,24 @@ function viewAllRoles()
             empprompt();
         });
 };
+
+
+
+//View all employees
+function viewAllEmployee()
+{
+    con.query("Select em.id AS emp_id, em.first_name, em.last_name, role.title as job_title, role.salary, department.name as dept_name, CONCAT(ep.first_name, ' ' ,ep.last_name) AS Manager from employee AS em\
+    join role on role.id = em.role_id\
+    join department on department.id = role.department_id\
+    left join employee AS ep on em.manager_id = ep.id\
+    order by em.id;",
+        function(err, results){
+            if (err) throw err;
+            console.log("");
+            console.log("------------------------------------------------------------------------------------------");
+            console.table(chalk.yellow("     All employees by job title,salary,dept and manager"),results);
+            console.log("");
+            empprompt();
+        });
+};
+
