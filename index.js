@@ -79,3 +79,19 @@ function empprompt(){
 
     });
 };
+
+
+//View all departments
+function viewAllDepartments()
+{   
+    con.query(
+        'SELECT * FROM department',
+        function(err, results) {
+            if (err) throw err;
+            console.log("");
+            console.log("--------------------------------");
+            console.table(chalk.yellow("       All Departments"),results); // results contains rows returned by server
+            console.log("");
+            empprompt();
+        });
+};
