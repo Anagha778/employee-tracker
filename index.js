@@ -8,7 +8,7 @@ const chalk = require('chalk');
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: " ",
+  password: "",
   database:"employee_db"
 });
 
